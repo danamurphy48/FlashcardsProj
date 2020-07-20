@@ -20,7 +20,7 @@ class Cards extends Component{
     };
 
     cardState(newcard){
-        if (newcard != null && newcard != -1) {
+        if (newcard != null && newcard !== -1) {
             this.setState({
             activeCard: newcard,
             showingDefinition: false,
