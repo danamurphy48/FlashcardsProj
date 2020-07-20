@@ -40,10 +40,10 @@ class Cards extends Component{
 
     nextCard(){
         var newcard;
-        if(this.state.activeCard === null || this.state.activeCard == -1){
+        if(this.state.activeCard === null || this.state.activeCard === -1){
             newcard = 0;
         }
-        else if (this.state.activeCard == this.state.cardPile.length -1) {
+        else if (this.state.activeCard === this.state.cardPile.length -1) {
             newcard = -1;
         }
         else{
@@ -57,7 +57,7 @@ class Cards extends Component{
         if(this.state.activeCard === 0){
             newcard = null;
         }
-        else if (this.state.activeCard == -1) {
+        else if (this.state.activeCard === -1) {
             newcard= this.state.cardPile.length-1;
         }
         else{
@@ -142,7 +142,7 @@ class Cards extends Component{
                         {this.state.title}
                     </div>
                     <div>
-                        {this.state.showingDefinition}
+                        {this.state.definition}
                     </div>
                 </div>
                 <div className='cardButtons'>
