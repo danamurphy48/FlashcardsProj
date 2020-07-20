@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 
+
 class Cards extends Component{
     state= {
         cardPile: null,
         activeCard: null,
         showingDefinition: null,
         title: null,
-        definition: null
+        definition: null,
+        action: null,
     };
 
     componentDidMount(){
@@ -17,40 +19,59 @@ class Cards extends Component{
         })
     };
 
-    cardState(){
-        this.setState({
+    cardState(newcard){
+        if (newcard != null && newcard != -1) {
+            this.setState({
+            activeCard: newcard,
             showingDefinition: false,
-            title: this.state.cardPile[this.state.activeCard].word,
-            definition: this.state.cardPile[this.state.activeCard].definition
+            title: this.state.cardPile[newcard].word,
+            definition: this.state.cardPile[newcard].definition
         })
+        } 
+        else {
+            this.setState({
+                activeCard: newcard,
+                showingDefinition: false,
+                title:null,
+                definition: null
+            })
+        }     
     }
 
     nextCard(){
-        if(this.state.activeCard === null){
-            this.state.activeCard = 0;
+        var newcard;
+        if(this.state.activeCard === null || this.state.activeCard == -1){
+            newcard = 0;
+        }
+        else if (this.state.activeCard == this.state.cardPile.length -1) {
+            newcard = -1;
         }
         else{
-            this.state.activeCard++;
+            newcard = this.state.activeCard+1;
         }
-        this.cardState()
+        this.cardState(newcard)
     }
 
     previousCard(){
+        var newcard;
         if(this.state.activeCard === 0){
-            this.state.activeCard = null;
+            newcard = null;
+        }
+        else if (this.state.activeCard == -1) {
+            newcard= this.state.cardPile.length-1;
         }
         else{
-            this.state.activeCard--;
+            newcard = this.state.activeCard-1;
         }
-        this.cardState()
+        this.cardState(newcard)
     }
 
     showDefinition(){
         this.setState({
-            showingDefinition: true
+            showingDefinition: true,
         })
     }
-
+    
     render(){
         if(this.state.cardPile===null){
             return (
@@ -60,13 +81,42 @@ class Cards extends Component{
         else if(this.state.activeCard === null){
             return (
             <div className='flexcolumn' onClick= {() => this.nextCard()}>
-                <img src={logo} className="App-logo" alt="logo" />
-                Ready?
+                <div className='flexcolumn'>
+                    <img src={logo} className="App-logo" alt="logo" />
+                    Ready?
+                </div>
+                <div className='button'onClick= {() => this.setState({
+                        action: null
+                })}>
+                    back
+                </div>
             </div>)
         }
-        else if(this.state.showingDefinition != true){
+        else if(this.state.activeCard === -1){
             return (
-            <div >
+            <div className='flexcolumn'>
+                <div>
+                    <img src={logo} className="App-logo" alt="logo" />
+                    end of stack
+                </div>
+                <div className='cardButtons'>                    
+                    <div className='button' onClick= {() => this.previousCard()}>
+                        Previous
+                    </div>
+                    <div className='button'onClick= {() => this.nextCard()}>
+                        start over
+                    </div>
+                </div>
+                <div className='button'onClick= {() => this.setState({
+                        action: null
+                    })}>
+                        back
+                </div>
+            </div>)
+        }
+        else if(this.state.showingDefinition !== true){
+            return (
+            <div className='flexcolumn'>
                 <div className='flashcard' onClick={() => this.showDefinition()}>
                 <img src={logo} className="App-logo" alt="logo" />
                     <div>
@@ -83,13 +133,21 @@ class Cards extends Component{
                     <div className='button' onClick= {() => this.previousCard()}>
                         Previous
                     </div>
+                    <div className='button' onClick= {() => this.showDefinition()}>
+                        Show
+                    </div>
+                </div>
+                <div className='button'onClick= {() => this.setState({
+                        action: null
+                })}>
+                    back
                 </div>
             </div>
             )
         }
         else{
             return (
-            <div>
+            <div className='flexcolumn'>
                 <div className='flashcard' onClick= {() => this.nextCard()}>
                 <img src={logo} className="App-logo" alt="logo" />
                     <div>
@@ -110,11 +168,15 @@ class Cards extends Component{
                         Previous
                     </div>
                 </div>
+                <div className='button'onClick= {() => this.setState({
+                        action: null
+                })}>
+                    back
+                </div>
             </div>
-
+    
             )
-        }
+        }        
     }
-
 }
 export default Cards;

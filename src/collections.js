@@ -3,6 +3,10 @@ import * as APIRequest from './axios_requests';
 import Axios from 'axios';
 import Cards from './Cards';
 import * as APIInterface from './api-interface';
+import logo from './logo.svg';
+import Cardlist from './CardList'
+//import EditCard from './EditCard'
+
 
 class Collections extends Component{
     state={
@@ -67,27 +71,106 @@ class Collections extends Component{
         return output;
     }
 
-    render(){
-        if (this.state.selected===null) {
+    CollectionBar(){
             return(
                 <div className='collections'>
                     <div className= 'collectionBar'>
                         {this.state.renderCollections}
                     </div>
                 </div>
-            );
+            );        
+    }
+    actionReview(){
+        return(
+            <div className='collections'>
+                 <div>
+                    {this.CollectionBar()}
+                </div>
+                <div className='cards'>
+                    <Cardlist cardpile = {this.state.activeCollection} />
+                </div>
+            </div>
+        )
+    }
+
+    actionEdit(){
+        return(
+            <div className='collections'>
+                 <div>
+                    {this.CollectionBar()}
+                </div>
+                <div className='cards'>
+                    {/* <EditCard cardpile = {this.state.activeCollection} /> */}
+                </div>
+            </div>
+        )
+    }
+    actionTest(){
+        return(
+            <div className='collections'>
+                 <div>
+                    {this.CollectionBar()}
+                </div>
+                <div className='cards'>
+                    <Cards cardpile = {this.state.activeCollection.cards} />
+                </div>
+            </div>
+        )
+    }
+    render(){
+        if (this.state.action === null && this.state.selected != null) {
+            return(
+                <div className='collections'>
+                    <div>
+                        { this.CollectionBar()}
+                    </div>
+                
+                    <div className='cards'>
+                        <img src={logo} className="App-logo" alt="logo" />
+                        <div className='cardButtons'>
+                            <div className='button'onClick= {() => this.setState({
+                                action: 'test'
+                            })}>
+                                Test
+                            </div>
+                            <div className='button'onClick= {() => this.setState({
+                            action: 'review'
+                            })}>
+                                Review
+                            </div>
+                            <div className='button'onClick= {() => this.setState({
+                            action: 'edit'
+                            })}>
+                                edit
+                            </div>
+                            <div className='button'onClick= {() => this.componentDidMount()}>
+                                update card deck
+                            </div>
+                        </div>
+                        <div className='button cardButtons'onClick= {() => this.setState({
+                            action: null
+                        })}>
+                            back
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+        else if (this.state.action === 'test') {
+            return this.actionTest();
+        }
+        else if (this.state.action==='review') {
+            return this.actionReview();
+        }
+        else if (this.state.action==='edit') {
+            return this.actionEdit();
         }
         else{
-            return(
+            return(                
                 <div className='collections'>
-                    <div className= 'collectionBar'>
-                        {this.state.renderCollections}
-                    </div>
-                    <div className='cards'>
-                        <Cards cardpile = {this.state.activeCollection.cards} />
-                    </div>
+                    {this.CollectionBar()}
                 </div>
-            );
+            )
         }
     }
 }
