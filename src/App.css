@@ -26,7 +26,7 @@
   margin-top: 1px;
   margin-bottom: 1px;
   margin-right: 2px;
-  border-radius: 7%;
+  border-radius: 25%;
 }
 
 .collectionBar-item{
@@ -34,15 +34,22 @@
 }
 
 .cardButtons{
+  align-items: center;
   flex-direction: row;
   display: flex;
   min-width: 40%;
   max-width: 40%;
+  margin: 0 auto;
 }
 
 .flexcolumn{
   flex-direction: column;
   display: flex;
+}
+
+
+.centerMe{
+  align-items: center;
 }
 
 .flashcard{
@@ -55,9 +62,10 @@
   background-color: grey;
   color: black;
   border: 2px solid black;
-  border-radius: 17%;
+  border-radius: 25%;
   margin-left: 3%;
   margin-right: 3%;
+  padding: 3%;
 }
 
 .border{
@@ -65,7 +73,13 @@
   margin-top: 1px;
   margin-bottom: 1px;
   margin-right: 2px;
-  border-radius: 7%;
+  border-radius: 25%;
+}
+.bordered{
+  border: 2px solid black;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  margin-right: 2px;
 }
 
 .App-logo {

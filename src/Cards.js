@@ -80,21 +80,16 @@ class Cards extends Component{
         }
         else if(this.state.activeCard === null){
             return (
-            <div className='flexcolumn' onClick= {() => this.nextCard()}>
+            <div className='flexcolumn centerMe' onClick= {() => this.nextCard()}>
                 <div className='flexcolumn'>
                     <img src={logo} className="App-logo" alt="logo" />
                     Ready?
-                </div>
-                <div className='button'onClick= {() => this.setState({
-                        action: null
-                })}>
-                    back
-                </div>
+                </div>               
             </div>)
         }
         else if(this.state.activeCard === -1){
             return (
-            <div className='flexcolumn'>
+            <div className='flexcolumn centerMe'>
                 <div>
                     <img src={logo} className="App-logo" alt="logo" />
                     end of stack
@@ -107,16 +102,11 @@ class Cards extends Component{
                         start over
                     </div>
                 </div>
-                <div className='button'onClick= {() => this.setState({
-                        action: null
-                    })}>
-                        back
-                </div>
             </div>)
         }
         else if(this.state.showingDefinition !== true){
             return (
-            <div className='flexcolumn'>
+            <div className='flexcolumn centerMe'>
                 <div className='flashcard' onClick={() => this.showDefinition()}>
                 <img src={logo} className="App-logo" alt="logo" />
                     <div>
@@ -137,17 +127,12 @@ class Cards extends Component{
                         Show
                     </div>
                 </div>
-                <div className='button'onClick= {() => this.setState({
-                        action: null
-                })}>
-                    back
-                </div>
             </div>
             )
         }
         else{
             return (
-            <div className='flexcolumn'>
+            <div className='flexcolumn centerMe'>
                 <div className='flashcard' onClick= {() => this.nextCard()}>
                 <img src={logo} className="App-logo" alt="logo" />
                     <div>
@@ -167,11 +152,6 @@ class Cards extends Component{
                     <div className='button' onClick= {() => this.previousCard()}>
                         Previous
                     </div>
-                </div>
-                <div className='button'onClick= {() => this.setState({
-                        action: null
-                })}>
-                    back
                 </div>
             </div>
     

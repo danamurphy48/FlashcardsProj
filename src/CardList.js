@@ -2,12 +2,12 @@ import React from 'react';
 
 function CardList(props) {
     var output = [];
-    props.cardpile.forEach(element => {
+    props.cardpile.map(element => {
         output.push(
-            <div className="border">
-                <div>element.id</div>
-                <div>element.title</div>
-                <div>element.definition</div>
+            <div className="bordered">
+                <div>{element.id}</div>
+                <div>{element.word}</div>
+                <div>{element.definition}</div>
             </div>
         ) 
     });

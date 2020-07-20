@@ -86,8 +86,15 @@ class Collections extends Component{
                  <div>
                     {this.CollectionBar()}
                 </div>
-                <div className='cards'>
-                    <Cardlist cardpile = {this.state.activeCollection} />
+                <div className='flexcolumn'>
+                    <div className='cards'>
+                        <Cardlist cardpile = {this.state.activeCollection.cards} />
+                    </div>
+                    <div className='button'onClick= {() => this.setState({
+                            action: null
+                    })}>
+                        back
+                    </div>
                 </div>
             </div>
         )
@@ -99,8 +106,15 @@ class Collections extends Component{
                  <div>
                     {this.CollectionBar()}
                 </div>
-                <div className='cards'>
-                    {/* <EditCard cardpile = {this.state.activeCollection} /> */}
+                <div className='flexcolumn'>
+                    <div className='cards'>
+                        {/* <EditCard cardpile = {this.state.activeCollection} /> */}
+                    </div>
+                    <div className='button'onClick= {() => this.setState({
+                            action: null
+                    })}>
+                        back
+                    </div>
                 </div>
             </div>
         )
@@ -111,9 +125,17 @@ class Collections extends Component{
                  <div>
                     {this.CollectionBar()}
                 </div>
-                <div className='cards'>
+                <div className='flexcolumn'>
+                    <div className='cards'>
                     <Cards cardpile = {this.state.activeCollection.cards} />
+                    </div>
+                    <div className='button'onClick= {() => this.setState({
+                            action: null
+                    })}>
+                        back
+                    </div>
                 </div>
+                
             </div>
         )
     }
@@ -125,7 +147,7 @@ class Collections extends Component{
                         { this.CollectionBar()}
                     </div>
                 
-                    <div className='cards'>
+                    <div className='cards centerMe'>
                         <img src={logo} className="App-logo" alt="logo" />
                         <div className='cardButtons'>
                             <div className='button'onClick= {() => this.setState({
@@ -147,11 +169,14 @@ class Collections extends Component{
                                 update card deck
                             </div>
                         </div>
-                        <div className='button cardButtons'onClick= {() => this.setState({
-                            action: null
-                        })}>
-                            back
+                        <div className='cardButtons'>
+                            <div className='button'onClick= {() => this.setState({
+                                action: null
+                            })}>
+                                back
+                            </div>
                         </div>
+
                     </div>
                 </div>
             )
