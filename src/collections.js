@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import * as APIRequest from './axios_requests';
 import Axios from 'axios';
 import Cards from './Cards';
+import * as APIInterface from './api-interface';
 
 class Collections extends Component{
     state={
@@ -24,22 +25,23 @@ class Collections extends Component{
         });
     };
 //we think bug resides below
-    setActive(number){
+    setActive(number, collections){
         this.state.selected = number;
-        let activeCollection = this.state.collections[number];
-        this.state.activeCollection = activeCollection;
+        // let activeCollection = this.state.collections[number];
+        //this.state.activeCollection = collections[number];
         this.setState({
+            activeCollection: this.state.collections[number],
             renderCollections: this.renderCollections(this.state.collections)
         })
     };
 
-    renderCollections(someData){
+    renderCollections(collections){
         let output = [];
-        for (let index = 0; index < someData.length; index++) {
-            const element = someData[index];
+        for (let index = 0; index < collections.length; index++) {
+            const element = collections[index];
             if (this.state.selected === index) {
                 output.push(
-                <div className= 'selected' onClick= {() => this.setActive(index)}>
+                <div className= 'selected' onClick= {() => this.setActive(index, collections)}>
                     <div>
                         {element.title}
                     </div>
@@ -66,16 +68,27 @@ class Collections extends Component{
     }
 
     render(){
-        return(
-            <div className='collections'>
-                <div className= 'collectionBar'>
-                    {this.state.renderCollections}
+        if (this.state.selected===null) {
+            return(
+                <div className='collections'>
+                    <div className= 'collectionBar'>
+                        {this.state.renderCollections}
+                    </div>
                 </div>
-                <div className='cards'>
-                    <Cards cards = {this.state.activeCollection} />
+            );
+        }
+        else{
+            return(
+                <div className='collections'>
+                    <div className= 'collectionBar'>
+                        {this.state.renderCollections}
+                    </div>
+                    <div className='cards'>
+                        <Cards cardpile = {this.state.activeCollection.cards} />
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
     }
 }
 

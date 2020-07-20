@@ -11,8 +11,9 @@ class Cards extends Component{
     };
 
     componentDidMount(){
+        let cards = this.props.cardpile;
         this.setState({
-            cardPile: this.props.cards, 
+            cardPile: cards, 
         })
     };
 
@@ -63,10 +64,10 @@ class Cards extends Component{
                 Ready?
             </div>)
         }
-        else if(this.state.showingDefinition !== true){
+        else if(this.state.showingDefinition != true){
             return (
-            <div>
-                <div className='flashcard'>
+            <div >
+                <div className='flashcard' onClick={() => this.showDefinition()}>
                 <img src={logo} className="App-logo" alt="logo" />
                     <div>
                         {this.state.activeCard}
@@ -89,7 +90,7 @@ class Cards extends Component{
         else{
             return (
             <div>
-                <div className='flashcard'>
+                <div className='flashcard' onClick= {() => this.nextCard()}>
                 <img src={logo} className="App-logo" alt="logo" />
                     <div>
                         {this.state.activeCard}
